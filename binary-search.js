@@ -1,9 +1,9 @@
-import fs from ('fs');
+import fs from 'fs';
 
 const dictionary = JSON.parse(fs.readFileSync('sortedDictionary.json', 'utf-8'));
 const searchTerm = process.argv[2];
 
-export default const binarySearch = function(term) {
+function binarySearch(term) {
 	let low = 0; 
 	let high = dictionary.length - 1;
 	let iterations = 0;
@@ -27,3 +27,5 @@ export default const binarySearch = function(term) {
 	let elapsed = `${end - start} ms.`;
 	return {elapsed, iterations, found: false};
 }
+
+console.log(binarySearch(searchTerm));

@@ -12,7 +12,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<!--Font Awesome-->
   <script src="https://use.fontawesome.com/5f1f3cb4d3.js"></script>
-  <link rel="stylesheet" type="text/css" href="assets/style.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 
 <body>
@@ -20,8 +20,156 @@
 	<!-- This is where React will deploy the contents it generates -->
 	<div id="app"></div>
 
+	<nav>
+		<div class='jumbotron'>
+			<h1><a href='http://www.gutenberg.org/ebooks/29765' target='_blank'>Webster's Unabridged English Dictionary circa 1913</a></h1>
+			<p>Demonstrating Binary Search in a React App</p>
+			<div class='links'></div>
+		</div>
+		<div class='search-canvas'>
+			<canvas height="50" class="canvas expandable" data-counter="0" data-expanded=false></canvas>
+      <div class='clickme'>Click Here To Search</div>
+      <div class="search">
+        <form class="search-form">      
+            <input type="text" class="form-control search-term"  placeholder="Search for..." />
+            <button class="btn btn-default search-btn" type="button">Go</button>
+        </form>
+      </div>
+    </div>
+
+
+  </nav>
+
+	
+
+	<main class='snippets'>
+		<div class='panel snippet'>
+			<div class='snippet-term'>apple</div>
+			<div class='snippet-definition'>Definition</div>
+		</div>
+	</main>
+
+	<footer class="footer container-fluid">
+    <p>Copyright <i class="fa fa-copyright" aria-hidden="true"></i><span class = "year"></span>&nbsp;<a href="https://github.com/wesleylhandy" target="_blank" class="my-name">Wesley L. Handy</a></p>
+  </footer>  
+
 	<!-- All of our JS code will be transpiled into this bundle.js file -->
 	<script src="bundle.js"></script>
+	<script type="text/javascript">
+		document.querySelector('.year').textContent = new Date().getFullYear();
+
+		const canvas = document.querySelector('.canvas');
+		const search = document.querySelector('.search');
+
+		const midX = canvas.width / 2;
+    const midY = canvas.height / 2;
+    const radius = midY - 3;
+
+		const draw = {
+		  drawQ: () => {
+		  	const ctx = canvas.getContext('2d');
+        ctx.beginPath();
+        ctx.arc(midX, midY, radius, Math.PI*.125, Math.PI*2.125);
+        ctx.lineTo(midX + radius * 3, midY + radius);
+        ctx.fillStyle = "rgba(239, 89, 89, 0.25)";   //#EF5959;
+        ctx.fill();
+        ctx.strokeStyle = "#B43144";
+        ctx.lineWidth = 6;
+        ctx.closePath();
+        ctx.stroke();
+        canvas.dataset.expanded = false;
+		  },
+		  drawEllipse: () => {
+		    let counter = parseInt(canvas.dataset.counter);
+		    //draw an ellipse until fills canvas - recursive call
+	      if (midX - counter !== midY) {
+	      	const ctx = canvas.getContext('2d');
+	        ctx.clearRect(0, 0, midX * 2, midY * 2);
+	        ctx.beginPath();
+	        ctx.arc(midX - counter, midY, radius, Math.PI/2, Math.PI*1.5);
+	        ctx.lineTo(midX + counter, midY - radius);
+	        ctx.arc(midX + counter, midY, radius, Math.PI*1.5, Math.PI/2);
+	        ctx.lineTo(midX - counter, midY + radius);
+	        ctx.fill();
+	        ctx.closePath();
+	        ctx.stroke();
+	        counter++;
+	        canvas.dataset.counter = counter;
+	        nextStep = setTimeout(draw.drawEllipse, 1);
+	      } else {
+		      canvas.dataset.expanded = true;
+		      search.style.display = 'inherit';
+		      search.focus();
+		    }
+		  },
+		  undoEllipse: () => {
+				let counter = parseInt(canvas.dataset.counter);
+	      //draw an ellipse until fills canvas - recursive call
+	      if (counter > 0) {
+	      	const ctx = canvas.getContext('2d');
+	        ctx.clearRect(0, 0, midX * 2, midY * 2);
+	        ctx.beginPath();
+	        ctx.arc(midX - counter, midY, radius, Math.PI/2, Math.PI*1.5);
+	        ctx.lineTo(midX + counter, midY - radius);
+	        ctx.arc(midX + counter, midY, radius, Math.PI*1.5, Math.PI/2);
+	        ctx.lineTo(midX - counter, midY + radius);
+	        ctx.fill();
+	        ctx.closePath();
+	        ctx.stroke();
+	        counter--;
+	        canvas.dataset.counter = counter;
+	        nextStep = setTimeout(draw.undoEllipse, 1);
+	      } else { 
+		      draw.drawQ();
+		      clickme.style.display = 'initial';
+		    }
+		  }
+		}
+
+		const clickme = document.querySelector('.clickme');
+
+		canvas.addEventListener('click', toggleExpand);
+		clickme.addEventListener('click', toggleExpand);
+
+		function toggleExpand(e) {
+			const expanded = JSON.parse(canvas.dataset.expanded);
+		  if (!expanded) {
+		  	clickme.style.display = 'none';
+		    draw.drawEllipse();
+		  } else {
+		  	search.style.display = 'none';
+		    draw.undoEllipse();
+		  }
+		};
+
+		document.querySelector(".search-form").addEventListener('submit', getValue);
+
+		function getValue(e) {
+			e.preventDefault();
+		  draw.undoEllipse();
+		  $(".search").hide();
+		  const term = $(".search-term").val().trim();
+		  $(".search-form").reset();
+		}
+
+		const links = document.querySelector('.links');
+
+		function renderLinks() {
+			const alphabet = [];
+			for (let i = 65; i < 91; i++) {
+				alphabet.push(String.fromCharCode(i))
+			}
+			let alphaList = alphabet.map((letter, i) => `<a href='/${letter}' class='letter-link' key="${i}">${letter}</a>`);
+			links.innerHTML = alphaList.join('');
+		}
+
+		$(document).ready(function(){
+		  draw.drawQ();
+		  renderLinks();
+		});
+
+
+	</script>
 
 	
 </body>

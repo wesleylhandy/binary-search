@@ -1,0 +1,164 @@
+html {
+  min-height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  height: 100%;
+  margin-bottom: 4rem;
+  font-family: 'Signika', sans-serif;
+  background-image: url("../images/low_contrast_linen_2x.png");
+  color: #F2F1A7;
+}
+
+.jumbotron {
+  background: rgba(239, 89, 89, 0.25);
+  margin-bottom: 1.5rem;
+}
+
+.jumbotron h1, .jumbotron p, .jumbotron div {
+  margin: 0 10%;
+}
+
+.jumbotron h1 a, .jumbotron h1 a:hover {
+  color: #EF5959;
+  text-decoration: none;
+}
+
+.jumbotron h1 {
+  font-size: 3rem;
+}
+
+.links {
+  padding-top: 4rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  font-size: 1.6rem;
+  width: 80%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.letter-link {
+  color: #88A9F7;
+  flex: 1;
+  padding: .4rem;
+  text-align: center;
+}
+
+.letter-link:hover {
+  color: #B43144;
+}
+
+.letter-link:not(:last-child) {
+
+  border-right: 1px solid #B43144;
+}
+
+.search-canvas {
+  margin: 0 auto;
+  width: 50%;
+  position: relative;
+}
+
+.canvas {
+  height: 8rem;
+  width: 100%;
+}
+
+.clickme {
+  color: #F2F1A7;
+  font-size: 2.4rem;
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: calc(50% - 1.2rem - 1.5px);
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.search {
+  display: none;
+  width: 90%;
+  font-size: 2.4rem;
+  height: 2.4rem
+  border: none;
+  position: absolute;
+  top: calc(50% - 1.7rem - 1.5px);
+  left: 5%;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.search-term {
+  flex: 8;
+}
+
+.search-btn {
+  flex: 1;
+}
+
+.search-term, .search-btn {
+  color: #F2F1A7;
+  background-color: rgba(239, 89, 89, 0.25);
+}
+
+.snippets {
+  margin: 2rem 10%;
+  display: flex;
+  flex-flow: nowrap column;
+}
+
+.snippet {
+  border: .3rem solid #88A9F7;
+  background-color: rgba(239, 89, 89, 0.5);
+  padding: .5rem;
+}
+
+.snippet-term {
+  border-bottom: .1rem solid #88A9F7;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.snippet-term::first-letter {
+  font-size: 5rem;
+  font-style: italic;
+}
+
+.snippet-definition {
+  margin-top: 1rem;
+  text-indent: 3.2rem;
+}
+
+.footer {
+    text-align: center;
+    padding-top: 0.5rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 4rem;
+    color: #F2F1A7;
+    background-color: #B43144;
+    border-top-style: solid;
+    border-top-color: #EF5959;
+    border-top-width: .625rem;
+}
+
+.footer a, .footer a:visited {
+  color: #F2F1A7;
+}
+
+.footer a:hover {
+  text-decoration: none;
+  text-shadow: 1px 1px 0px #88A9F7;
+}
