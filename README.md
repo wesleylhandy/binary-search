@@ -12,4 +12,4 @@ If the term at the middle is greater, the term below it becomes the new maximum,
 
 This logical operation is completed until either the search term is found in the list or the low and high indices cross, which means the search term could not be found.
 
-In terms of time complexity, this is a `log <sub>2</sub> n`. So for a list of 8 terms, binary search should iterate no more than 3 times; for a list of 1,048,576 terms, it would take no more than 20 iterations to complete.
+In terms of time complexity, this is log<sub>2</sub> n. So for a list of 8 terms, binary search should iterate no more than 3 times; for a list of 1,048,576 terms, it would take no more than 20 iterations to complete.
