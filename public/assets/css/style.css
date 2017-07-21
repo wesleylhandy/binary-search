@@ -112,27 +112,38 @@ body {
   background-color: rgba(239, 89, 89, 0.25);
 }
 
-.snippets {
+.snippets, .related-entries {
   margin: 2rem 10%;
   display: flex;
   flex-flow: nowrap column;
 }
 
-.snippet {
+.snippet, .entries {
   border: .3rem solid #88A9F7;
   background-color: rgba(239, 89, 89, 0.5);
   padding: .5rem;
 }
 
-.snippet-term {
+.snippet-term, .entries-heading {
   border-bottom: .1rem solid #88A9F7;
   font-weight: bold;
   font-size: 3rem;
 }
 
-.snippet-term::first-letter {
+.entry:not(:last-child) {
+  border-bottom: 1px solid #88A9F7;
+  padding-bottom: 1.5rem;
+}
+
+.snippet-term::first-letter, .entry-term::first-letter {
   font-size: 5rem;
   font-style: italic;
+}
+
+.entry-term {
+  font-size: 3rem;
+  font-weight: bold;
+
 }
 
 .snippet-definition {
