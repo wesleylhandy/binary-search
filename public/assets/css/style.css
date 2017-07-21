@@ -13,28 +13,26 @@ body {
   color: #F2F1A7;
 }
 
-.jumbotron {
+.header {
   background: rgba(239, 89, 89, 0.25);
-  margin-bottom: 1.5rem;
+  height: 7.5rem;
 }
 
-.jumbotron h1, .jumbotron p, .jumbotron div {
+.header h1, .header p, .header div {
   margin: 0 10%;
 }
 
-.jumbotron h1 a, .jumbotron h1 a:hover {
+.header h1 a, .header h1 a:hover {
   color: #EF5959;
   text-decoration: none;
 }
 
-.jumbotron h1 {
+.header h1 {
   font-size: 3rem;
 }
 
 .links {
-  padding-top: 4rem;
-  padding-bottom: 0;
-  margin-bottom: 0;
+  margin: 1rem auto;
   font-size: 1.6rem;
   width: 80%;
   display: flex;
@@ -47,19 +45,22 @@ body {
   flex: 1;
   padding: .4rem;
   text-align: center;
+  transition: 300ms all;
 }
 
 .letter-link:hover {
   color: #B43144;
+  transform: scale(1.2)
 }
 
-.letter-link:not(:last-child) {
-
+.letter-link {
+  border-left: 1px solid #B43144;
   border-right: 1px solid #B43144;
 }
 
 .search-canvas {
   margin: 0 auto;
+  padding: 2rem 0;
   width: 50%;
   position: relative;
 }
